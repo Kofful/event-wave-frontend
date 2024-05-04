@@ -66,7 +66,7 @@ const EventList = () => {
   }, [isLoading, events, error]);
 
   return (
-    <Grid container sx={{ minHeight: '600px' }} mb={3} spacing={2}>
+    <Grid container sx={{ minHeight: '600px' }} spacing={2}>
       {contents}
     </Grid>
   );
