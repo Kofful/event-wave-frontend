@@ -1,4 +1,4 @@
-import { createContext, useCallback, useMemo, useState } from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 
 export const AuthorizedUserContext = createContext({
   authorizedUser: null,
@@ -18,6 +18,10 @@ export const AuthorizedUserContextProvider = ({ children }) => {
     return parsedUserData;
   }, [storageUserJson])
   const [authorizedUser, setAuthorizedUser] = useState(storageUser);
+
+  useEffect(() => {
+    setAuthorizedUser(storageUser);
+  }, [storageUser])
 
   const saveAuthorizedUser = useCallback((userData) => {
     localStorage.setItem('authorizedUser', JSON.stringify(userData));
