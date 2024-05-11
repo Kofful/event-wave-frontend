@@ -5,7 +5,7 @@ import { eventTypes } from '../../../constants/eventTypes';
 import { EventFiltersContext } from '../../../context/EventFiltersContext';
 
 //TODO
-// - add localization for dates
+// - add localization for dates (https://mui.com/x/react-date-pickers/adapters-locale/#custom-field-placeholder)
 // - add validation for dates
 const EventFilters = () => {
   const [eventType, setEventType] = useState(0);
