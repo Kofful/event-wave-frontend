@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from '../components/HomePage/HomePage';
-import ErrorPage from '../components/ErrorPage/ErrorPage';
+import ErrorPage from '../components/Errors/ErrorPage';
 import EventPage from '../components/EventPage/EventPage';
 import LoginPage from '../components/LoginPage/LoginPage';
 import Layout from '../components/Layout/Layout';
@@ -8,7 +8,9 @@ import RegisterPage from '../components/RegisterPage/RegisterPage';
 import CreateEventPage from '../components/CreateEventPage/CreateEventPage';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import { USER_ROLES } from '../constants/userRoles';
-import ForbiddenPage from '../components/ForbiddenPage/ForbiddenPage';
+import ForbiddenPage from '../components/Errors/ForbiddenPage';
+import UpdateEventPage from '../components/UpdateEventPage/UpdateEventPage';
+import NotFoundPage from '../components/Errors/NotFoundPage';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,13 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/events/:id/update',
+        element:
+          <AuthenticatedRoute allowedRoles={[USER_ROLES.MANAGER]}>
+            <UpdateEventPage />
+          </AuthenticatedRoute>,
+      },
+      {
         path: '/events/:id',
         element: <EventPage />,
       },
@@ -42,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: '/forbidden',
         element: <ForbiddenPage />,
+      },
+      {
+        path: '/not-found',
+        element: <NotFoundPage />,
       },
     ],
   },

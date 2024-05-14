@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthorizedUserContext } from '../context/AuthorizedUserContext';
 import { Navigate } from 'react-router-dom';
 import { SnackbarContext } from '../context/SnackbarContext';
-import ForbiddenPage from '../components/ForbiddenPage/ForbiddenPage';
+import ForbiddenPage from '../components/Errors/ForbiddenPage';
 
 const AuthenticatedRoute = ({ allowedRoles, children }) => {
   const { authorizedUser } = useContext(AuthorizedUserContext);
