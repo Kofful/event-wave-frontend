@@ -39,7 +39,7 @@ const EventCard = ({ event }) => {
           to={`/events/${event.id}`}
           size="large"
         >
-          ВІД 1000 ГРН
+          ВІД {event.tickets_min_price ?? 999} ГРН
         </Button>
       </CardActions>
     </Card>
