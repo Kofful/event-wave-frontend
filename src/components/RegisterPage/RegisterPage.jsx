@@ -78,7 +78,7 @@ const RegisterPage = () => {
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 autoComplete="given-name"
                 name="firstName"
@@ -89,7 +89,7 @@ const RegisterPage = () => {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 required
                 fullWidth
@@ -99,7 +99,7 @@ const RegisterPage = () => {
                 autoComplete="family-name"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <TextField
                 required
                 fullWidth
@@ -109,7 +109,7 @@ const RegisterPage = () => {
                 autoComplete="email"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <TextField
                 required
                 fullWidth
@@ -120,7 +120,7 @@ const RegisterPage = () => {
                 autoComplete="new-password"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <FormControlLabel
                 control={<Checkbox name="isManager" color="primary" />}
                 label="Я менеджер. (Ми зв'яжемось з Вами для підтвердження)"
@@ -145,7 +145,7 @@ const RegisterPage = () => {
             {responseError}
           </Typography>
           <Grid container justifyContent="flex-end">
-            <Grid item>
+            <Grid>
               <Link component={RouterLink} to="/login" variant="body2">
                 Вже є акаунт? Увійти
               </Link>

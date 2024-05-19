@@ -107,7 +107,7 @@ const LoginPage = () => {
             {responseError}
           </Typography>
           <Grid container justifyContent="flex-end">
-            <Grid item>
+            <Grid>
               <Link component={RouterLink} to="/register" variant="body2">
                 Немає акаунту? Зареєструватися
               </Link>
