@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { Box, Container, CssBaseline, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { LoadingButton } from '@mui/lab';
-import { createOrder } from '../../api/payments';
+import { createOrder } from '../../api/orders';
 import { AuthorizedUserContext } from '../../context/AuthorizedUserContext';
 
 const PurchaseTicketPage = () => {

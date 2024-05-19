@@ -1,8 +1,40 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { useContext, useState } from 'react';
+import { AuthorizedUserContext } from '../../context/AuthorizedUserContext';
+import { LoadingButton } from '@mui/lab';
+import { SnackbarContext } from '../../context/SnackbarContext';
+import { makeRefund } from '../../api/orders';
+import { useNavigate } from 'react-router-dom';
 
-const RefundDialog = ({ isOpen, setIsOpen }) => {
+const RefundDialog = ({ isOpen, setIsOpen, order, onRefund }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { authorizedUser, setAuthorizedUser } = useContext(AuthorizedUserContext);
+  const { showSnackbar } = useContext(SnackbarContext);
+
+  const navigate = useNavigate();
+
   const handleClose = () => {
     setIsOpen(false);
+  };
+
+  const sendRefundRequest = async () => {
+    try {
+      setIsLoading(true);
+      await makeRefund(order.id, authorizedUser.token);
+      onRefund();
+    } catch (e) {
+      if (e.response?.status === 401) {
+        setAuthorizedUser(null);
+        showSnackbar('Ви не авторизовані. Увійдіть, будь ласка, в акаунт.');
+        navigate('/login');
+      } else {
+        showSnackbar('Виникла помилка під час повернення.');
+      }
+    } finally {
+      setIsLoading(false);
+      setIsOpen(false);
+    }
   };
 
   return (
@@ -22,9 +54,9 @@ const RefundDialog = ({ isOpen, setIsOpen }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Назад</Button>
-        <Button onClick={handleClose} color="error" autoFocus>
+        <LoadingButton loading={isLoading} onClick={sendRefundRequest} color="error" autoFocus>
           Повернути
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );

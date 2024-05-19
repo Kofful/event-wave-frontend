@@ -15,7 +15,7 @@ import { useState } from 'react';
 import RefundDialog from './RefundDialog';
 import EventLabel from '../Common/Event/EventLabel';
 
-const OrderCard = ({ order }) => {
+const OrderCard = ({ order, refreshOrders }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -75,7 +75,12 @@ const OrderCard = ({ order }) => {
           ПОВЕРНУТИ
         </Button>
       </CardActions>
-      <RefundDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      <RefundDialog
+        isOpen={isDialogOpen}
+        setIsOpen={setIsDialogOpen}
+        order={order}
+        onRefund={refreshOrders}
+      />
     </Card>
   );
 };

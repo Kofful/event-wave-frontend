@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { getUserOrders } from '../../api/orders';
 import { AuthorizedUserContext } from '../../context/AuthorizedUserContext';
@@ -17,29 +17,29 @@ const MyTicketsPage = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getOrdersFromApi = async () => {
-      setIsLoading(true);
-      setError('');
-      try {
-        const response = await getUserOrders(authorizedUser.token);
+  const getOrdersFromApi = useCallback(async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const response = await getUserOrders(authorizedUser.token);
 
-        setOrders(response.data.data);
-      } catch (e) {
-        if (e.response?.status === 401) {
-          setAuthorizedUser(null);
-          showSnackbar('Ви не авторизовані. Увійдіть, будь ласка, в акаунт.');
-          navigate('/login');
-        }
-        setOrders([]);
-        setError('Щось пішло не так.')
-      } finally {
-        setIsLoading(false);
+      setOrders(response.data.data);
+    } catch (e) {
+      if (e.response?.status === 401) {
+        setAuthorizedUser(null);
+        showSnackbar('Ви не авторизовані. Увійдіть, будь ласка, в акаунт.');
+        navigate('/login');
       }
-    };
-
-    getOrdersFromApi();
+      setOrders([]);
+      setError('Щось пішло не так.')
+    } finally {
+      setIsLoading(false);
+    }
   }, [authorizedUser, setAuthorizedUser, navigate, showSnackbar]);
+
+  useEffect(() => {
+    getOrdersFromApi();
+  }, [getOrdersFromApi]);
 
   const contents = useMemo(() => {
     if (isLoading) {
@@ -56,16 +56,16 @@ const MyTicketsPage = () => {
 
     if (!orders.length) {
       return (
-        <span>За заданими параметрами подій не знайдено.</span>
+        <span>Ще не придбано жодного квитка. Після того, як Ви їх придбаєте, вони з'являться тут.</span>
       );
     }
 
     return orders.map(order => (
       <Grid xs={4} key={order.id}>
-        <OrderCard order={order}/>
+        <OrderCard order={order} refreshOrders={getOrdersFromApi} />
       </Grid>
     ));
-  }, [isLoading, orders, error]);
+  }, [getOrdersFromApi, isLoading, orders, error]);
 
   return (
     <Box
