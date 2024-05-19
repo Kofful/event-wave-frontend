@@ -11,6 +11,7 @@ import { USER_ROLES } from '../constants/userRoles';
 import ForbiddenPage from '../components/Errors/ForbiddenPage';
 import UpdateEventPage from '../components/UpdateEventPage/UpdateEventPage';
 import NotFoundPage from '../components/Errors/NotFoundPage';
+import PurchaseTicketPage from '../components/PurchaseTicketPage/PurchaseTicketPage';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
           <AuthenticatedRoute allowedRoles={[USER_ROLES.MANAGER]}>
             <UpdateEventPage />
           </AuthenticatedRoute>,
+      },
+      {
+        path: '/events/:id/purchase/:ticketId',
+        element: <PurchaseTicketPage />,
       },
       {
         path: '/events/:id',
