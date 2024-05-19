@@ -67,6 +67,17 @@ const Header = () => {
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Typography textAlign="center">Акаунт</Typography>
                     </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography
+                        component={Link}
+                        textAlign="center"
+                        to="/my_tickets"
+                        color="inherit"
+                        sx={{ textDecoration: 'none' }}
+                      >
+                        Мої квитки
+                      </Typography>
+                    </MenuItem>
                     {
                       authorizedUser.user.role === USER_ROLES.MANAGER && (
                         <MenuItem onClick={handleCloseUserMenu}>

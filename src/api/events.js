@@ -16,7 +16,8 @@ export const createEvent = async (data, token) => {
       'Content-Type': 'multipart/form-data',
     }
   });
-}
+};
+
 export const updateEvent = async (id, data, token) => {
   return await axios.post(`${apiBase}/events/${id}`,
     {

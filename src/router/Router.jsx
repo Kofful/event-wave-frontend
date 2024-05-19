@@ -12,6 +12,7 @@ import ForbiddenPage from '../components/Errors/ForbiddenPage';
 import UpdateEventPage from '../components/UpdateEventPage/UpdateEventPage';
 import NotFoundPage from '../components/Errors/NotFoundPage';
 import PurchaseTicketPage from '../components/PurchaseTicketPage/PurchaseTicketPage';
+import MyTicketsPage from '../components/MyTicketsPage/MyTicketsPage';
 
 const router = createBrowserRouter([
   {
@@ -32,10 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/events/:id/update',
-        element:
+        element: (
           <AuthenticatedRoute allowedRoles={[USER_ROLES.MANAGER]}>
             <UpdateEventPage />
-          </AuthenticatedRoute>,
+          </AuthenticatedRoute>
+        )
       },
       {
         path: '/events/:id/purchase/:ticketId',
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: '/events/:id',
         element: <EventPage />,
+      },
+      {
+        path: '/my_tickets',
+        element: (
+          <AuthenticatedRoute allowedRoles={[USER_ROLES.MANAGER, USER_ROLES.VISITOR]}>
+            <MyTicketsPage />
+          </AuthenticatedRoute>
+        ),
       },
       {
         path: '/login',

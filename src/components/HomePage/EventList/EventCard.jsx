@@ -1,16 +1,7 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs'
-import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-
-const EventLabel = styled(Box)`
-    height: 64px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-`;
+import EventLabel from '../../Common/Event/EventLabel';
 
 const EventCard = ({ event }) => {
   return (
