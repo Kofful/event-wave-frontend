@@ -1,7 +1,6 @@
 import { createContext, useCallback, useMemo, useState } from 'react';
-import { IconButton, Slide, Snackbar } from '@mui/material';
+import { IconButton, Slide, Snackbar, Alert } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Alert } from '@mui/lab';
 
 export const SnackbarContext = createContext({
   showSnackbar: Function,
